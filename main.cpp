@@ -1,4 +1,4 @@
-// COMSC210 | Lab 20 | Loma Kim
+// COMSC-210 | Lab 20 | Loma Kim
 #include <iostream>
 #include <iomanip>
 
@@ -13,18 +13,18 @@ class Chair {
     // constructors
     Chair() {
         prices = new double[SIZE];
-        legs = (rand() % 2) + 2;        //ses legs to random # between 3-4
+        legs = (rand() % 2) + 3;    //sets legs to random # between 3-4
         for (int i = 0; i < SIZE; i++) {
             //sets price to random # between 100.00-999.99
             prices[i] = ((rand() % (MAX - MIN + 1)) + MIN) / (double)100;
         }
     }
 
-    Chair(int l) {
+    Chair(int l, double p[SIZE]) {
         prices = new double[SIZE];
         legs = l;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = p[i];       //sets price to the argument's counterpart
     }
 
     // setters and getters
@@ -60,31 +60,25 @@ class Chair {
 };
 
 int main() {
-    srand(time(0));             //Seed for random numbers
+    srand(time(0));                 //seed for random numbers
 
     cout << fixed << setprecision(2);
 
     //creating pointer to first chair object
+    //now populated by default constructor
     Chair * chairPtr = new Chair;
-    chairPtr -> setLegs(4);
-    chairPtr -> setPrices(121.21, 232.32, 414.14);
-    chairPtr -> print();
 
     //creating dynamic chair object with constructor
-    Chair * livingChair = new Chair(3);
-    livingChair -> setPrices(525.25, 434.34, 252.52);
-    livingChair -> print();
+    //now populated by default constructor
+    Chair * livingChair = new Chair();
+
     delete livingChair;
     livingChair = nullptr;
 
     //creating dynamic array of chair objects
+    //now populated by default constructor
     Chair * collection = new Chair[SIZE];
-    collection[0].setLegs(4);
-    collection[0].setPrices(441.41, 552.52, 663.63);
-    collection[1].setLegs(4);
-    collection[1].setPrices(484.84, 959.59, 868.68);
-    collection[2].setLegs(4);
-    collection[2].setPrices(626.26, 515.15, 757.57);
+    
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
     return 0;
